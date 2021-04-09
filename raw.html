@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="scripts/jquery-3.6.0.js"></script>
+    <script src="scripts/angular.js"></script>
+    <script src="ScriptCode.js"></script>
+</head>
+<body ng-app="Task" ng-controller="ctrlRegister" ng-init="TblDisplay()">
+    <div>
+        <form>
+            <input type="text" ng-model="Name" required>
+            <input type="text" ng-model="Surname" required>
+            <input type="number" class="form-control" ng-model="Pnum" required>
+            <input type="number" class="form-control" ng-model="Age" required>
+            <select class="form-select" ng-model="Idtype" required>
+                <option selected disabled value="">Choose...</option>
+                <option value="aadhar">Aadhar</option>
+                <option value="passport">Passport</option>
+            </select>
+            <input type="text" class="form-control" ng-model="Proof" required>
+            <input type="radio" name="answer" value="Male" ng-model="answers.Gender" />Male
+            <input type="radio" name="answer" value="Female" ng-model="answers.Gender" />Female
+            <button class="btn btn-primary" type="button" ng-click="BtnSubmit()">Submit</button>
+            <button class="btn btn-primary" type="button" ng-click="Btnclear()">clear</button>
+        </form>
+    </div>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>SurName</th>
+                    <th>Phone Number</th>
+                    <th>Age</th>
+                    <th>Proof Type</th>
+                    <th>Proof ID</th>
+                    <th>Gender</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Reg in Registers">
+                    <td>{{Reg.Id}}</td>
+                    <td>{{Reg.Name}}</td>
+                    <td>{{Reg.Surname}}</td>
+                    <td>{{Reg.Pnum}}</td>
+                    <td>{{Reg.Age}}</td>
+                    <td>{{Reg.Idtype}}</td>
+                    <td>{{Reg.Proof}}</td>
+                    <td>{{Reg.Gender}}</td>
+                    <td><a ng-click="RegEdit(Reg)">Edit</a> |
+                        <a ng-click="RegDel(Reg.Id)">Delete</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    {{Id}}
+</body>
+</html>
