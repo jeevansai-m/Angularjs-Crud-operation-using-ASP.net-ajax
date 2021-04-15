@@ -6,26 +6,90 @@
     <script src="scripts/jquery-3.6.0.js"></script>
     <script src="scripts/angular.js"></script>
     <script src="ScriptCode.js"></script>
+    <link href="scripts/bootstrap.min.css" rel="stylesheet" />
+    <script src="scripts/bootstrap.min.js"></script>
 </head>
 <body ng-app="Task" ng-controller="ctrlRegister" ng-init="TblDisplay()">
-    <div>
-        <form>
-            <input type="text" ng-model="Name" required>
-            <input type="text" ng-model="Surname" required>
-            <input type="number" class="form-control" ng-model="Pnum" required>
-            <input type="number" class="form-control" ng-model="Age" required>
-            <select class="form-select" ng-model="Idtype" required>
-                <option selected disabled value="">Choose...</option>
-                <option value="aadhar">Aadhar</option>
-                <option value="passport">Passport</option>
-            </select>
-            <input type="text" class="form-control" ng-model="Proof" required>
-            <input type="radio" name="answer" value="Male" ng-model="answers.Gender" />Male
-            <input type="radio" name="answer" value="Female" ng-model="answers.Gender" />Female
-            <button class="btn btn-primary" type="button" ng-click="BtnSubmit()">Submit</button>
-            <button class="btn btn-primary" type="button" ng-click="Btnclear()">clear</button>
-        </form>
+    <br />
+    <div class="container" style="width: 900px;background-color:#f1f1f1;">
+        
+        <form class="row g-3 "  name="frm">
+            <!--Name-->
+            <div class="col-md-4">
+                <label class="form-label">Name</label>
+                <input type="text" placeholder="Enter Name" class="form-control" maxlength="12" minlength="3" name="Name" ng-model="Name" required>
+                <span ng-show="frm.Name.$dirty && frm.Name.$error.required">
+                   *should not be empty
+                </span>
+                <span ng-show="frm.Name.$dirty && frm.Name.$error.minlength">
+                    *too short shouls be more than 3 words
+                </span>
+            </div>
+            <!--Surname-->
+            <div class="col-md-4">
+                <label class="form-label">Surname</label>
+                <input  class="form-control" name="surname" type="text" placeholder="Enter Surname" ng-model="Surname" required>
+                <div  ng-show="frm.surname.$dirty && frm.surname.$error.required">
+                    * please enter Surname
+                </div>
+            </div>
+            <!--phone number-->
+            <div class="col-md-4">
+                <label class="form-label">Phone number</label>
+                <input type="number" placeholder="Enter phone number" name="Pnum" ng-minlength="10" maxlength="10" class="form-control" ng-model="Pnum" required>
+                <div ng-show="frm.Pnum.$dirty && frm.Pnum.$error.required"   >
+                    should not be empty
+                </div>
+                <div ng-show="frm.Pnum.$dirty && frm.Pnum.$error.minlength || frm.Pnum.$error.maxlength ">
+                    enter 10 digit which start 9 number 
+                </div>
+            </div>
+            <!--Age-->
+            <div class="col-md-3">
+                <label class="form-label">Age</label>
+                <input type="number" placeholder="Enter Age" class="form-control" ng-model="Age" required>
+                <div class="invalid-feedback">
+                    Please provide a valid Age.
+                </div>
+            </div>
+            <!--Id type-->
+            <div class="col-md-3">
+                <label class="form-label">Id Type</label>
+                <select class="form-select" ng-model="Idtype" required>
+                    <option selected disabled value="">-select Idtype-</option>
+                    <option value="aadhar">Aadhar</option>
+                    <option value="passport">Passport</option>
+                </select>
+            </div>
+            <!--ID number-->
+            <div class="col-md-3">
+                <label class="form-label">ID Number</label>
+                <input type="text" placeholder="Enter Proof Id" class="form-control" ng-model="Proof" required>
+                <div class="invalid-feedback">
+                    Please provide a valid zip.
+                </div>
+            </div>
+            <!--Gender-->
+            <div class="col-md-1">
+                <label class="form-label">Gender</label>
+                <div class="form-check form-check-inline">
+                    <input  class="form-check-input" type="radio" name="answer" value="Male" ng-model="answers.Gender" />
+                    <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input  class="form-check-input" type="radio" name="answer" value="Female" ng-model="answers.Gender" />
+                    <label class="form-check-label">Female</label>
+                </div>
+            </div>
+            <!--Buttons-->
+            <div class="col-12">
+                <button class="btn btn-primary" type="button" ng-click="BtnSubmit()">Submit</button>
+                <button class="btn btn-primary" type="button"  ng-click="Btnclear()">clear</button>
+            </div>
+</form>
+        <br />
     </div>
+    <br />
     <div class="container">
         <table class="table table-bordered">
             <thead>
@@ -51,13 +115,26 @@
                     <td>{{Reg.Idtype}}</td>
                     <td>{{Reg.Proof}}</td>
                     <td>{{Reg.Gender}}</td>
-                    <td><a ng-click="RegEdit(Reg)">Edit</a> |
-                        <a ng-click="RegDel(Reg.Id)">Delete</a></td>
+                    <td><a style="color: green" ng-click="RegEdit(Reg)">Edit</a> |
+                        <a style="color: red" ng-click="RegDel(Reg.Id)">Delete</a></td>
                 </tr>
 
             </tbody>
         </table>
     </div>
-    {{Id}}
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
 </body>
 </html>

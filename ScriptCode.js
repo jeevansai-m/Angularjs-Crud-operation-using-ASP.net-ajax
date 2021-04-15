@@ -12,6 +12,7 @@ app.controller("ctrlRegister", function ($scope, $http) {
         $scope.Idtype = "";
         $scope.Proof = "";
         $scope.answers.Gender = "";
+        $scope.frm.Name = false;
     };
     $scope.BtnSubmit = function () {
         $scope.reg = {};
